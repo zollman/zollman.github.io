@@ -1,7 +1,7 @@
-title:            Sigsegv
-description:      Aaron Zollman - Notes
+title:            Aaron Zollman
+description:      Aaron Zollman
 # Your site's domain goes here. Leave localhost server or blank when working locally.
-url:              http://zollman.github.io/
+url:              
 disqus_shortname: 
 
 # Owner/author information
@@ -9,13 +9,13 @@ owner:
   name:           Aaron Zollman
   avatar:         bio-photo.jpg
   bio:            Security software business guy and hipster-nerd cliche
-  email:          zollman+github@sigsegv.com
+  email:          az+site@sigsegv.com
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
-  twitter:        twitter.com/aaronzollman
+  twitter:        aaronzollman
   facebook:       
-  github:         github.com/zollman
+  github:         zollman
   stackoverflow:  
-  linkedin:       linkedin.com/in/zollman
+  linkedin:       zollman
   instagram:      
   lastfm:         
   tumblr: 
@@ -24,7 +24,7 @@ owner:
   steam: 
   dribbble: 
   # For Google Authorship https://plus.google.com/authorship
-  google_plus:    plus.google.com/+AaronZollman
+  google_plus:    https://plus.google.com/+AaronZollman
 
 # Analytics and webmaster tools stuff goes here
 google_analytics:   
@@ -35,9 +35,11 @@ bing_verify:
 # Links to include in top navigation
 # For external links add external: true
 links:
-  - title: About
+  - title: Whoami
     url: /about/
-  - title: Posts
+  - title: Projects
+    url: /projects/
+  - title: Notes
     url: /posts/
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
