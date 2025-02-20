@@ -5,7 +5,7 @@ import { trimExcerpt } from '@/lib/utils'
 import { template } from '@/settings'
 
 export async function getStaticPaths({ paginate }): Promise<Astro.getStaticPathsResult> {
-    const blogEntries = await Astro.glob('../../assets/blog/*.md')
+    const blogEntries = await Astro.glob('../../content/BlogPosts/*.md')
                     const posts = blogEntries
 		.map(post => ({
 			title: post.frontmatter.title,

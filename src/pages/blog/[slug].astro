@@ -1,8 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 
-export async function getStaticPaths() {
-	const posts = await Astro.glob('../../assets/blog/*.md*')
+export async function getStaticPaths(): Promise<any> {
+    const posts = await Astro.glob('../../content/BlogPosts/*.md*')
 
 	return posts.map(post => {
 		const slug = post.file.split('/').pop().split('.')[0]

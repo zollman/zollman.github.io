@@ -17,10 +17,10 @@
 - [X] Email Icon
 - [ ] Download CV pdf
 - [X] Hide cv sections
+- [X] Hide blog section if no content
+- [ ] Footer always at least at the end of the screen
 
 ## Integration
-- [ ] Arxiv API ?
 - [X] Markdown support
-- [ ] Latex support ?
 - [X] DaisyUI
-- [ ] RSS feed
+- [X] RSS feed
