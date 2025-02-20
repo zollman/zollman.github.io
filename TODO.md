@@ -18,7 +18,7 @@
 - [ ] Download CV pdf
 - [X] Hide cv sections
 - [X] Hide blog section if no content
-- [ ] Footer always at least at the end of the screen
+- [X] Footer always at least at the end of the screen
 
 ## Integration
 - [X] Markdown support
