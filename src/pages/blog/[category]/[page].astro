@@ -4,12 +4,12 @@ import Layout from '@/layouts/Layout.astro'
 import { trimExcerpt } from '@/lib/utils'
 import { template } from '@/settings'
 
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths({ paginate }):any {
     const blogEntries = await Astro.glob('../../../assets/blog/*.md')
-	const posts = blogEntries
+                    const posts = blogEntries
 		.map(post => ({
 			title: post.frontmatter.title,
-			date: post.frontmatter.date,
+            date: post.frontmatter.date,
 			badge: post.frontmatter.tags[0],
 			excerpt: trimExcerpt(post.frontmatter.excerpt),
             slug: post.file.split('/')?.pop()?.split('.')[0] ?? '',
@@ -111,7 +111,7 @@ const selectedCategory = Astro.params.category || "all"
     </div>
 
     <script>
-        document.getElementById("categoryFilter").addEventListener("change", (event) => {
+        document.getElementById("categoryFilter")?.addEventListener("change", (event) => {
         const selected = event.target.value;
             window.location = selected === "all" ? "/blog/all/1" : `/blog/${selected}/1`;
     });
