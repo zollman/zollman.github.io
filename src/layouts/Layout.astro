@@ -37,7 +37,7 @@ const {
 		<div class={`bg-base-100 drawer lg:drawer-open ${template.menu_left ? 'drawer-end' : ''}`}>
 			<input id='my-drawer' type='checkbox' class='drawer-toggle' />
 			<!-- Drawer content -->
-			<div class='drawer-content bg-base-100'>
+            <div class='drawer-content bg-base-100'>
 				<div class='bg-base-100 z-50 text-base-content shadow-sm'>
 					<nav class='navbar'>
 						<div class='navbar-start'>
@@ -74,11 +74,11 @@ const {
 						</div>
 					</nav>
 				</div>
-				<main class='p-8 pt-10 lg:pt-16 lg:max-w-5xl max-w-full mx-auto'>
+                <main class='p-8 pt-10 lg:pt-16 lg:max-w-5xl max-w-full mx-auto min-h-screen flex flex-col justify-between'>
 					<!-- Page content -->
 					<slot />
-				</main>
 				<Footer />
+				</main>
 			</div>
 			<!-- Drawer side -->
 			<div class='drawer-side z-40'>
