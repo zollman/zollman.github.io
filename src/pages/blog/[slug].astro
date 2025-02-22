@@ -1,21 +1,24 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import {template} from '@/settings'
+import {getCollection, render} from 'astro:content'
 
-export async function getStaticPaths(): Promise<any> {
-    const posts = await Astro.glob('../../content/BlogPosts/*.md*')
+export async function getStaticPaths(): Promise<Array<{ params: { slug: string }, props: { post: any } }>> {
+    const blogEntries = await getCollection("blog");
 
-	return posts.map(post => {
-		const slug = post.file.split('/').pop().split('.')[0]
-
-		return {
-			params: { slug },
-			props: { post },
-		}
-	})
+    const posts = blogEntries
+        .map(post => {
+        const slug = post.id
+            return {
+            params: { slug },
+            props: { post },
+            }
+    })
+    return posts
 }
-
-const { frontmatter, Content } = Astro.props.post
-const { title, date, tags } = frontmatter
+const {post} = Astro.props;
+const { title, date, tags} = post.data; 
+const { Content } = await render(post);
 ---
 
 <Layout title={title}>
@@ -79,8 +82,8 @@ const { title, date, tags } = frontmatter
          prose-ol:list-decimal prose-ol:pl-6
          prose-li:mb-2
          prose-img:rounded-lg prose-img:my-8'
-			>
-				<Content />
+        >
+                <Content />
 			</div>
 		</article>
 	</div>
