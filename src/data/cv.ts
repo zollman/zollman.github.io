@@ -57,7 +57,7 @@ export const publications = [
 		authors: 'Marie Curie, Pierre Curie',
 		journal: 'Annales de Chimie et de Physique',
 		time: '1904',
-		link: 'https://example.com',
+		link: '#',
 		abstract: 'A detailed analysis of the properties and behavior of radioactive elements, including the discovery of radium and polonium.',
 	},
 	{
@@ -65,7 +65,7 @@ export const publications = [
 		authors: 'Marie Curie',
 		journal: 'Philosophical Magazine',
 		time: '1900',
-		link: 'https://example.com',
+		link: '#',
 		abstract: 'Exploration of the phenomena of radioactivity, its measurement, and implications for physics and chemistry.',
 	},
 	{
@@ -73,7 +73,7 @@ export const publications = [
 		authors: 'Marie Curie',
 		journal: 'Comptes Rendus de l’Académie des Sciences',
 		time: '1898',
-		link: 'https://example.com',
+		link: '#',
 		abstract: 'Early research leading to the identification of uranium’s radioactive properties.',
 	},
 ];
