@@ -4,6 +4,10 @@
 
 Astro Academia is a personal academic website built using Astro, a modern static site generator. The website is designed to showcase academic achievements, research papers, blog posts, and a CV. It is fast, responsive, and easy to maintain, making it an ideal platform for academics and researchers to present their work.
 
+## How to use it
+
+Fork this repository to create your new website starting from this template.
+
 ## How to Create a CV Using the `cv.ts` File
 
 The `cv.ts` file located in the `src/data/` directory is used to define the structure and content of your CV. This file exports an object containing various sections of your CV, such as education, experience, publications, and more.
@@ -70,7 +74,7 @@ The blog collection is located in the `src/content/BlogPosts/` directory. Each b
 ### Adding a New Blog Post
 
 1. Navigate to the `src/content/BlogPosts/` directory.
-2. Create a new Markdown file for your blog post (e.g., `post11.md`).
+2. Create a new Markdown file for your blog post (e.g., `post1.md`).
 3. Add the content of your blog post using Markdown syntax. Include frontmatter at the top of the file to define metadata such as title, date, and tags.
 
 ### Example Blog Post (`post11.md`)
@@ -80,6 +84,7 @@ The blog collection is located in the `src/content/BlogPosts/` directory. Each b
 title: "New Blog Post"
 date: "2023-10-01"
 tags: ["research", "astro"]
+excerpt: "Some short paragraphs"
 ---
 
 # New Blog Post
@@ -89,6 +94,5 @@ This is the content of the new blog post. Write your article here using Markdown
 
 Once you have added the new blog post, it will be automatically included in the blog collection and displayed on the blog page of your website.
 
----
-
-This documentation provides an overview of Astro Academia, instructions for creating a CV using the `cv.ts` file, guidance on using the `settings.ts` file, and information on where to find and add new blog posts.
+## Deploy
+The template provides a workflow to deploy the website on Github pages as a static website.
