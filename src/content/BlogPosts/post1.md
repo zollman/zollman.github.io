@@ -3,7 +3,6 @@ title: "The Discovery of Radium"
 date: "1902-12-26"
 tags: ["Physics", "Research"]
 excerpt: "An account of the discovery of radium and its properties."
-category: "Research"
 ---
 
 # The Discovery of Radium
