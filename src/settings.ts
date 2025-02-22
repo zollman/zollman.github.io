@@ -27,6 +27,8 @@ export const template = {
 	transitions: true,
 	lightTheme: 'winter',
 	darkTheme: 'dracula',
+	lightTheme: 'light',
+	darkTheme: 'dark',
 	excerptLength: 200,
 	postPerPage: 5,
     base: '/astro_academia' // Repository name starting with /
