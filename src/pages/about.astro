@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { profile } from '../settings'
+
+const { fullName, title } = profile
+---
+
+<Layout title="About - Aaron Zollman" description="Background and interests">
+	<div class="max-w-4xl mx-auto">
+		<h1 class="text-4xl font-bold mb-8">Hi.</h1>
+		
+		<div class="prose prose-lg max-w-none">
+
+            <p>
+                I am a hands-on security and software engineering leader who has done tours in government, 
+                startups, healthcare and global financial institutions. Coming up on 30 years in the industry,
+                with tours in software engineering, data, and infrastructure, I've learned that humility, 
+                curiosity about all the edges of a complex problem, and an understanding of how to Get Things
+                Done are what you need to make amazing things happen.
+            </p>
+
+            <p>
+                Things to talk to me about:
+            </p>
+						
+			<ul>
+				<li><b>Cloud security</b>, especially the evolving nature of cloud infrastructure, and how 
+                    to simplify life for engineers building modern products.</li>
+				<li><b>Compliance as code</b>, implementing technical guardrails for developers and end-users 
+                    that enable them with freedom to explore, while creating transparency for regulators
+                    and partners and managing risk effectively. I'm particularly interested in applications
+                    of OpenPolicyAgent, eBPF and other policy / monitoring languages.
+                </li>
+				<li><b>Security applications of new tech</b>; of course that means AI (and especially 
+                    MCP/A2A architectures), but I'm also excited
+                    by WASM (and its ability to create clear component boundaries that run in different
+                    sandboxes) and Rust (and other modern languages).
+                </li>
+				<li><b>The security and enterprise startup ecosystem</b>, especially teams solving 
+                    problems affecting real people in healthcare, manufacturing and logistics. I've
+                    done a little seed investing and advisory work - though I'm not actively looking
+                    for new investments or roles.
+                </li>
+				<li><b>Security careers</b>, how builders, breakers and operators can grow and work 
+                    together to advance security programs and help their organizations build securely.
+                    I'll also bend your ear off about why the CISO role is a difficult chimera, with
+                    responsibilities that naturally fall under the CTO, GC and COO - with competing
+                    interests and few folks who can do all three well.
+                </li>
+			</ul>
+			
+			<h2>So...</h2>
+			<p>
+				If those topics are of interest to you, I'm always interested in comparing notes and
+                stories. I'm not hard to find - look for me in Brooklyn, at Hacker Summer Camp, Summercon,
+                fwd:cloudsec or on the Internet.
+			</p>
+		</div>
+		
+		<div class="mt-12">
+			<a 
+				href="/" 
+				class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+			>
+				← Back to Home
+			</a>
+		</div>
+	</div>
+</Layout>

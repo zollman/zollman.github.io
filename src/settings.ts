@@ -1,8 +1,8 @@
 export const profile = {
-	fullName: 'Your Name',
-	title: '',
+	fullName: 'Aaron Zollman',
+	title: 'Security nerd and software engineer. Learning to wear the white hat.',
 	institute: '',
-	author_name: '', // Author name to be highlighted in the papers section
+	author_name: 'Aaron Zollman', // Author name to be highlighted in the papers section
 	research_areas: [
 		// { title: 'Physics', description: 'Brief description of the research interest', field: 'physics' },
 	],
@@ -11,9 +11,10 @@ export const profile = {
 // Set equal to an empty string to hide the icon that you don't want to display
 export const social = {
 	email: '',
-	linkedin: '',
-	x: 'https://www.x.com/',
-	github: '',
+	instagram: 'https://instagram.com/aaronzollman',
+	linkedin: 'https://linkedin.com/in/zollman',
+	x: 'https://www.x.com/aaronzollman',
+	github: 'https://github.com/zollman',
 	gitlab: '',
 	scholar: '',
 	inspire: '',

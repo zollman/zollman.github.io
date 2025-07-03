@@ -1,0 +1,77 @@
+---
+import SocialIcons from './SocialIcons.astro'
+import { profile } from '../../settings'
+
+export interface Props {
+  profilePicture: ImageMetadata
+  navigationLinks?: Array<{
+    title: string
+    href: string
+  }>
+}
+
+const { profilePicture, navigationLinks = [] } = Astro.props
+const { fullName, title } = profile
+
+// Default navigation links if none provided
+const defaultLinks = [
+  { title: 'Whoami', href: '/about' }
+]
+
+const links = navigationLinks.length > 0 ? navigationLinks : defaultLinks
+---
+
+<div class="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative library-bg">
+  <!-- Background overlay for better contrast -->
+  <div class="absolute inset-0 bg-black/50"></div>
+  
+  <!-- Profile Card -->
+  <div class="relative z-10 bg-white rounded-3xl shadow-2xl p-12 max-w-md w-full mx-4 text-center">
+    <!-- Profile Picture -->
+    <div class="mb-6">
+      <img 
+        src={profilePicture.src} 
+        alt={fullName}
+        class="w-28 h-28 rounded-full mx-auto object-cover shadow-lg ring-4 ring-white"
+      />
+    </div>
+    
+    <!-- Name -->
+    <h1 class="text-2xl font-bold text-gray-900 mb-4">
+      {fullName}
+    </h1>
+    
+    <!-- Description/Title -->
+    {title && (
+      <p class="text-gray-600 mb-8 leading-relaxed text-sm">
+        {title}
+      </p>
+    )}
+    
+    <!-- Social Icons -->
+    <div class="mb-8">
+      <SocialIcons />
+    </div>
+    
+    <!-- Navigation Links -->
+    <div class="border-t border-gray-200 pt-6">
+      {links.map((link, index) => (
+        <div class={`${index > 0 ? 'mt-3' : ''}`}>
+          <a 
+            href={link.href}
+            class="text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 text-sm"
+          >
+            {link.title}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Set the background image */
+  .library-bg {
+    background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+  }
+</style>
