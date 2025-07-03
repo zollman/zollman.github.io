@@ -23,7 +23,7 @@ jobs:
       - name: Install, build, and upload your site output
         uses: withastro/action@v4
         env:
-          PUBLIC_WEBSITE_URL: https://dev.sigsegv.com
+          PUBLIC_WEBSITE_URL: https://zollman.github.io/
           PUBLIC_BASE_PATH: ""
 
   deploy:
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: staging
-      url: https://dev.sigsegv.com
+      url: https://zollman.github.io/
     steps:
       - name: Deploy to Staging
         id: deployment

@@ -53,7 +53,7 @@ export const template = {
 }
 
 export const seo = {
-	default_title: 'Astro Academia',
-	default_description: 'Astro Academia is a template for academic websites.',
-	default_image: '/images/astro-academia.png',
+	default_title: 'Aaron Zollman - Security Nerd and Software Engineer',
+	default_description: 'Personal website, with thoughts on security and software',
+	default_image: '/assets/profile_pictures.jpg',
 }
