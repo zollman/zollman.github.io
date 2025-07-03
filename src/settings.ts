@@ -1,3 +1,23 @@
+// Environment-based configuration helpers
+const getWebsiteUrl = () => {
+	// Check for explicit environment variable first
+	if (import.meta.env.PUBLIC_WEBSITE_URL) {
+		return import.meta.env.PUBLIC_WEBSITE_URL;
+	}
+	
+	// Fallback based on build environment
+	if (import.meta.env.PROD) {
+		return 'https://sigsegv.com';
+	}
+	
+	// Default for development
+	return 'http://localhost:4321';
+};
+
+const getBasePath = () => {
+	return import.meta.env.PUBLIC_BASE_PATH || '';
+};
+
 export const profile = {
 	fullName: 'Aaron Zollman',
 	title: 'Security nerd and software engineer. Learning to wear the white hat.',
@@ -22,14 +42,14 @@ export const social = {
 }
 
 export const template = {
-	website_url: 'https://localhost:4321', // Astro needs to know your site’s deployed URL to generate a sitemap. It must start with http:// or https://
+	website_url: getWebsiteUrl(), // Astro needs to know your site’s deployed URL to generate a sitemap. It must start with http:// or https://
 	menu_left: false,
 	transitions: true,
 	lightTheme: 'light', // Select one of the Daisy UI Themes or create your own
 	darkTheme: 'dark', // Select one of the Daisy UI Themes or create your own
 	excerptLength: 200,
 	postPerPage: 5,
-    base: '' // Repository name starting with /
+    base: getBasePath() // Repository name starting with /
 }
 
 export const seo = {
