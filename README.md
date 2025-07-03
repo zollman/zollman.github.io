@@ -1,3 +1,15 @@
+# Aaron's copy of Astro Academia Documentation
+
+To run:
+```
+npm run dev
+```
+
+Core pages you want to edit:
+* [intro](src/pages/index.astro)
+* [settings](src/settings.ts)
+* [navbar] (components/ui/Navbar.astro)
+
 # Astro Academia Documentation
 
 ## What is Astro Academia?
