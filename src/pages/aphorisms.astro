@@ -1,0 +1,249 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const aphorisms = await getCollection('aphorisms');
+const sortedAphorisms = aphorisms.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="Aphorisms - Aaron Zollman" description="Wisdom cards with practical insights">
+    <!-- Full viewport container that breaks out of the main layout constraints -->
+    <div id="viewport-container" class="fixed inset-0 bg-base-100 flex items-center justify-center p-4 z-10">
+        <div id="content-wrapper" class="w-full max-w-md relative">
+            <!-- Header positioned above the centered card -->
+            <div id="header-section" class="absolute -top-20 left-0 right-0 text-center">
+                <h1 class="text-3xl font-bold text-base-content mb-2">Aphorisms</h1>
+                <p class="text-base-content/70">Wisdom cards for practical insights</p>
+            </div>
+            
+            <!-- This container is now the centered element -->
+            <div id="aphorism-container" class="relative">
+                {sortedAphorisms.map((aphorism, index) => (
+                    <div 
+                        id={`aphorism-card-${index}`}
+                        class={`aphorism-card absolute w-full transition-all duration-300 ${index === 0 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}
+                        data-index={index}
+                    >
+                        <div id={`card-content-${index}`} class="card bg-base-200 shadow-xl border border-base-300 min-h-[500px] flex flex-col">
+                            <div id={`card-body-${index}`} class="card-body p-8 flex-1 flex flex-col justify-between">
+                                <div id={`card-main-content-${index}`} class="flex-1 flex flex-col justify-center items-center text-center space-y-6">
+                                    <div class="text-6xl mb-4">
+                                        {aphorism.data.icon || '💡'}
+                                    </div>
+                                    <h2 class="text-xl font-bold text-base-content leading-tight">
+                                        {aphorism.data.title}
+                                    </h2>
+                                    <p class="text-base-content/80 text-sm leading-relaxed">
+                                        {aphorism.data.description}
+                                    </p>
+                                </div>
+                                <div id={`card-footer-${index}`} class="flex justify-between items-center mt-6">
+                                    <div class="text-xs text-base-content/50">
+                                        {index + 1}/{sortedAphorisms.length}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+            <!-- Navigation positioned below the centered card -->
+            <div id="navigation-section" class="absolute -bottom-20 left-0 right-0">
+                <div id="button-controls" class="flex justify-center space-x-4 mb-4">
+                    <button id="prev-btn" class="btn btn-circle btn-outline btn-sm" disabled>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button id="next-btn" class="btn btn-circle btn-outline btn-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div id="dot-indicators" class="flex justify-center space-x-2">
+                    {sortedAphorisms.map((_, index) => (
+                        <button 
+                            class={`w-2 h-2 rounded-full transition-all ${index === 0 ? 'bg-primary' : 'bg-base-content/20'}`}
+                            data-dot={index}
+                        ></button>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script is:inline>
+    let currentIndex = 0;
+    let cards = [];
+    let totalCards = 0;
+    let prevBtn = null;
+    let nextBtn = null;
+    let dots = [];
+    let container = null;
+    
+    function init() {
+        cards = Array.from(document.querySelectorAll('.aphorism-card'));
+        totalCards = cards.length;
+        prevBtn = document.getElementById('prev-btn');
+        nextBtn = document.getElementById('next-btn');
+        dots = Array.from(document.querySelectorAll('[data-dot]'));
+        container = document.getElementById('aphorism-container');
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => previousCard());
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => nextCard());
+        }
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToCard(index));
+        });
+        
+        // Touch/swipe support
+        let startX = 0;
+        let startY = 0;
+        let endX = 0;
+        let endY = 0;
+        
+        if (container) {
+            container.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            });
+            
+            container.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            });
+            
+            container.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                endY = e.changedTouches[0].clientY;
+                
+                const deltaX = endX - startX;
+                const deltaY = endY - startY;
+                
+                // Only trigger swipe if horizontal movement is greater than vertical
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                    if (deltaX > 0) {
+                        previousCard();
+                    } else {
+                        nextCard();
+                    }
+                }
+            });
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                previousCard();
+            } else if (e.key === 'ArrowRight') {
+                nextCard();
+            }
+        });
+        
+        updateUI();
+    }
+    
+    function goToCard(index) {
+        if (index >= 0 && index < totalCards) {
+            currentIndex = index;
+            updateUI();
+        }
+    }
+    
+    function nextCard() {
+        if (currentIndex < totalCards - 1) {
+            currentIndex++;
+            updateUI();
+        }
+    }
+    
+    function previousCard() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateUI();
+        }
+    }
+    
+    function updateUI() {
+        // Update cards
+        cards.forEach((card, index) => {
+            if (index === currentIndex) {
+                card.classList.remove('opacity-0', 'translate-x-full', '-translate-x-full');
+                card.classList.add('opacity-100', 'translate-x-0');
+            } else if (index < currentIndex) {
+                card.classList.remove('opacity-100', 'translate-x-0', 'translate-x-full');
+                card.classList.add('opacity-0', '-translate-x-full');
+            } else {
+                card.classList.remove('opacity-100', 'translate-x-0', '-translate-x-full');
+                card.classList.add('opacity-0', 'translate-x-full');
+            }
+        });
+        
+        // Update buttons
+        if (prevBtn) {
+            prevBtn.disabled = currentIndex === 0;
+        }
+        if (nextBtn) {
+            nextBtn.disabled = currentIndex === totalCards - 1;
+        }
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.remove('bg-base-content/20');
+                dot.classList.add('bg-primary');
+            } else {
+                dot.classList.remove('bg-primary');
+                dot.classList.add('bg-base-content/20');
+            }
+        });
+    }
+    
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        init();
+    });
+</script>
+
+<style>
+    .aphorism-card {
+        height: 500px;
+    }
+    
+    /* Responsive card heights */
+    @media (max-width: 640px) {
+        .aphorism-card {
+            height: 450px;
+        }
+    }
+    
+    @media (max-height: 600px) {
+        .aphorism-card {
+            height: 350px;
+        }
+    }
+    
+    /* Ensure container matches card height */
+    #aphorism-container {
+        height: 500px;
+    }
+    
+    @media (max-width: 640px) {
+        #aphorism-container {
+            height: 450px;
+        }
+    }
+    
+    @media (max-height: 600px) {
+        #aphorism-container {
+            height: 350px;
+        }
+    }
+</style>
