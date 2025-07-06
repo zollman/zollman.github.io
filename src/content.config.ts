@@ -28,6 +28,11 @@ const aphorisms = defineCollection({
         order: z.number(),
         icon: z.string().optional(),
         description: z.string(),
+        references: z.array(z.object({
+            title: z.string(),
+            url: z.string().url(),
+            author: z.string().optional(),
+        })).optional(),
     }),
 });
 

@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
+// Get all aphorisms and sort them by order
 const aphorisms = await getCollection('aphorisms');
 const sortedAphorisms = aphorisms.sort((a, b) => a.data.order - b.data.order);
 ---
@@ -20,13 +21,12 @@ const sortedAphorisms = aphorisms.sort((a, b) => a.data.order - b.data.order);
             <div id="aphorism-container" class="relative">
                 {sortedAphorisms.map((aphorism, index) => (
                     <div 
-                        id={`aphorism-card-${index}`}
                         class={`aphorism-card absolute w-full transition-all duration-300 ${index === 0 ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}
                         data-index={index}
                     >
-                        <div id={`card-content-${index}`} class="card bg-base-200 shadow-xl border border-base-300 min-h-[500px] flex flex-col">
-                            <div id={`card-body-${index}`} class="card-body p-8 flex-1 flex flex-col justify-between">
-                                <div id={`card-main-content-${index}`} class="flex-1 flex flex-col justify-center items-center text-center space-y-6">
+                        <div class="card bg-base-200 shadow-xl border border-base-300 min-h-[500px] flex flex-col">
+                            <div class="card-body p-8 flex-1 flex flex-col justify-between">
+                                <div class="flex-1 flex flex-col justify-center items-center text-center space-y-6">
                                     <div class="text-6xl mb-4">
                                         {aphorism.data.icon || '💡'}
                                     </div>
@@ -37,10 +37,22 @@ const sortedAphorisms = aphorisms.sort((a, b) => a.data.order - b.data.order);
                                         {aphorism.data.description}
                                     </p>
                                 </div>
-                                <div id={`card-footer-${index}`} class="flex justify-between items-center mt-6">
+                                <div class="flex justify-between items-center mt-6">
                                     <div class="text-xs text-base-content/50">
                                         {index + 1}/{sortedAphorisms.length}
                                     </div>
+                                    {/* Show references button only if references exist */}
+                                    {aphorism.data.references && aphorism.data.references.length > 0 && (
+                                        <button 
+                                            class="btn btn-ghost btn-xs p-1 hover:bg-base-300 references-btn"
+                                            data-card-index={index}
+                                            title="View references"
+                                        >
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                            </svg>
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -74,9 +86,37 @@ const sortedAphorisms = aphorisms.sort((a, b) => a.data.order - b.data.order);
             </div>
         </div>
     </div>
+    
+    <!-- References overlay modal -->
+    <div id="references-overlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-20 hidden">
+        <div class="bg-base-200 rounded-lg shadow-xl max-w-md w-full max-h-80 overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-bold text-base-content">References</h3>
+                    <button id="close-references" class="btn btn-ghost btn-sm btn-circle">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div id="references-content" class="space-y-3">
+                    <!-- References will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
 </Layout>
 
+<script define:vars={{ aphorismsReferences: sortedAphorisms.map((aphorism, index) => ({
+    index, 
+    references: aphorism.data.references || null
+})) }}>
+    // Store references data globally for client-side access
+    window.aphorismsReferences = aphorismsReferences;
+</script>
+
 <script is:inline>
+    // Global state for card navigation and UI elements
     let currentIndex = 0;
     let cards = [];
     let totalCards = 0;
@@ -84,7 +124,11 @@ const sortedAphorisms = aphorisms.sort((a, b) => a.data.order - b.data.order);
     let nextBtn = null;
     let dots = [];
     let container = null;
+    let referencesOverlay = null;
+    let referencesContent = null;
+    let closeReferencesBtn = null;
     
+    // Initialize the aphorisms interface
     function init() {
         cards = Array.from(document.querySelectorAll('.aphorism-card'));
         totalCards = cards.length;
@@ -92,7 +136,11 @@ const sortedAphorisms = aphorisms.sort((a, b) => a.data.order - b.data.order);
         nextBtn = document.getElementById('next-btn');
         dots = Array.from(document.querySelectorAll('[data-dot]'));
         container = document.getElementById('aphorism-container');
+        referencesOverlay = document.getElementById('references-overlay');
+        referencesContent = document.getElementById('references-content');
+        closeReferencesBtn = document.getElementById('close-references');
         
+        // Navigation event listeners
         if (prevBtn) {
             prevBtn.addEventListener('click', () => previousCard());
         }
@@ -103,6 +151,32 @@ const sortedAphorisms = aphorisms.sort((a, b) => a.data.order - b.data.order);
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => goToCard(index));
         });
+        
+        // References functionality
+        const referenceBtns = document.querySelectorAll('.references-btn');
+        referenceBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const cardIndex = parseInt(btn.getAttribute('data-card-index'));
+                const referencesData = window.aphorismsReferences.find(item => item.index === cardIndex);
+                if (referencesData && referencesData.references) {
+                    showReferences(referencesData.references);
+                }
+            });
+        });
+        
+        // Modal event listeners
+        if (closeReferencesBtn) {
+            closeReferencesBtn.addEventListener('click', hideReferences);
+        }
+        
+        if (referencesOverlay) {
+            referencesOverlay.addEventListener('click', (e) => {
+                if (e.target === referencesOverlay) {
+                    hideReferences();
+                }
+            });
+        }
         
         // Touch/swipe support
         let startX = 0;
@@ -148,6 +222,44 @@ const sortedAphorisms = aphorisms.sort((a, b) => a.data.order - b.data.order);
         });
         
         updateUI();
+    }
+    
+    function showReferences(references) {
+        if (!referencesContent || !referencesOverlay) return;
+        
+        referencesContent.innerHTML = '';
+        references.forEach(ref => {
+            const refDiv = document.createElement('div');
+            refDiv.className = 'p-3 bg-base-100 rounded border border-base-300';
+            
+            const title = document.createElement('h4');
+            title.className = 'font-semibold text-base-content mb-1';
+            title.textContent = ref.title;
+            
+            const author = document.createElement('p');
+            author.className = 'text-sm text-base-content/70 mb-2';
+            author.textContent = ref.author || 'Unknown Author';
+            
+            const link = document.createElement('a');
+            link.href = ref.url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.className = 'text-sm text-primary hover:text-primary-focus underline';
+            link.textContent = 'View Reference →';
+            
+            refDiv.appendChild(title);
+            refDiv.appendChild(author);
+            refDiv.appendChild(link);
+            referencesContent.appendChild(refDiv);
+        });
+        
+        referencesOverlay.classList.remove('hidden');
+    }
+    
+    function hideReferences() {
+        if (referencesOverlay) {
+            referencesOverlay.classList.add('hidden');
+        }
     }
     
     function goToCard(index) {
