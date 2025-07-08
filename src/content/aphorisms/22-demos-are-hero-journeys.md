@@ -1,7 +1,7 @@
 ---
 title: "Demos are Hero Journeys"
 order: 22
-icon: "📝"
+icon: "⛰️"
 description: "Show off your work! Regularly demo’ing what you’ve built for others encourages you to keep the user’s concerns first and foremost, and helps avoid rabbit holes that are technically interesting but ultimately irrelevant. But don’t make people sit through a demo where you show off every feature and detail - if you find yourself saying “and then you can just…”, stop: focus your talk track for a demo on *motivation* and *impact* instead of features and clicks. Even better: put your user on a [Hero’s Journey](https://en.wikipedia.org/wiki/Hero%27s_journey), the classic story template from mythology (and blockbuster films): our hero’s normal life has a problem, a sense of unease; sets off into new territory; learns from friends along the way; overcomes challenges; has a great success and returns home changed by the experience. A demo with a story that follows these beats will be more engaging and memorable than a simple walkthrough."
 references:
   - title: "The Hero With a Thousand Faces"
