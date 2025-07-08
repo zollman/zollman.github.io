@@ -46,9 +46,8 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
     <div id="viewport-container" class="fixed inset-0 bg-base-100 flex items-center justify-center p-4 z-10">
         <div id="content-wrapper" class="w-full max-w-md relative">
             <!-- Header positioned above the centered card -->
-            <div id="header-section" class="absolute -top-20 left-0 right-0 text-center">
-                <h1 class="text-3xl font-bold text-base-content mb-2">Tools for context</h1>
-                <p class="text-base-content/70">Navigating product, organizations and motivation</p>
+            <div id="header-section" class="absolute -top-16 left-0 right-0 text-center">
+                <h1 class="text-3xl font-bold text-base-content">Tools for context</h1>
             </div>
             
             <!-- This container is now the centered element -->
@@ -94,15 +93,30 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
                 ))}
             </div>
             
+            <!-- Previous button positioned to the left of the card -->
+            <button id="prev-btn" class="absolute left-0 top-1/2 btn btn-circle btn-outline btn-sm" disabled={index === 0}>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            
+            <!-- Next button positioned to the right of the card -->
+            <button id="next-btn" class="absolute right-0 top-1/2 btn btn-circle btn-outline btn-sm" disabled={index === allAphorisms.length - 1}>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+            
             <!-- Navigation positioned below the centered card -->
             <div id="navigation-section" class="absolute -bottom-20 left-0 right-0">
-                <div id="button-controls" class="flex justify-center space-x-4 mb-4">
-                    <button id="prev-btn" class="btn btn-circle btn-outline btn-sm" disabled={index === 0}>
+                <!-- Mobile navigation buttons (visible on small screens) -->
+                <div id="mobile-navigation" class="flex justify-center space-x-4 mb-4 sm:hidden">
+                    <button id="prev-btn-mobile" class="btn btn-circle btn-outline btn-sm" disabled={index === 0}>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
-                    <button id="next-btn" class="btn btn-circle btn-outline btn-sm" disabled={index === allAphorisms.length - 1}>
+                    <button id="next-btn-mobile" class="btn btn-circle btn-outline btn-sm" disabled={index === allAphorisms.length - 1}>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
@@ -164,6 +178,8 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
     let totalCards = 0;
     let prevBtn = null;
     let nextBtn = null;
+    let prevBtnMobile = null;
+    let nextBtnMobile = null;
     let dots = [];
     let container = null;
     let referencesOverlay = null;
@@ -183,6 +199,8 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
         totalCards = cards.length;
         prevBtn = document.getElementById('prev-btn');
         nextBtn = document.getElementById('next-btn');
+        prevBtnMobile = document.getElementById('prev-btn-mobile');
+        nextBtnMobile = document.getElementById('next-btn-mobile');
         dots = Array.from(document.querySelectorAll('[data-dot]'));
         container = document.getElementById('aphorism-container');
         referencesOverlay = document.getElementById('references-overlay');
@@ -204,6 +222,12 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
         }
         if (nextBtn) {
             nextBtn.addEventListener('click', () => nextCard());
+        }
+        if (prevBtnMobile) {
+            prevBtnMobile.addEventListener('click', () => previousCard());
+        }
+        if (nextBtnMobile) {
+            nextBtnMobile.addEventListener('click', () => nextCard());
         }
         
         dots.forEach((dot, index) => {
@@ -370,6 +394,12 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
         if (nextBtn) {
             nextBtn.disabled = currentIndex === totalCards - 1;
         }
+        if (prevBtnMobile) {
+            prevBtnMobile.disabled = currentIndex === 0;
+        }
+        if (nextBtnMobile) {
+            nextBtnMobile.disabled = currentIndex === totalCards - 1;
+        }
         
         // Update dots
         dots.forEach((dot, index) => {
@@ -440,6 +470,55 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
     @media (max-height: 600px) {
         #aphorism-container {
             height: 350px;
+        }
+    }
+    
+    /* Navigation button positioning */
+    #prev-btn, #next-btn {
+        z-index: 20;
+        /* Prevent button movement on press */
+        transform-origin: center;
+    }
+    
+    /* Prevent button movement on active/pressed state */
+    #prev-btn:active, #next-btn:active,
+    #prev-btn-mobile:active, #next-btn-mobile:active {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Override any DaisyUI button active transforms for side buttons */
+    #prev-btn {
+        transform: translateX(-60px) translateY(-50%) !important;
+    }
+    
+    #next-btn {
+        transform: translateX(60px) translateY(-50%) !important;
+    }
+    
+    /* Maintain transforms even when active */
+    #prev-btn:active {
+        transform: translateX(-60px) translateY(-50%) !important;
+    }
+    
+    #next-btn:active {
+        transform: translateX(60px) translateY(-50%) !important;
+    }
+    
+    /* For smaller screens, hide side buttons and show mobile buttons */
+    @media (max-width: 640px) {
+        #prev-btn, #next-btn {
+            display: none !important;
+        }
+        
+        #mobile-navigation {
+            display: flex !important;
+        }
+    }
+    
+    @media (min-width: 641px) {
+        #mobile-navigation {
+            display: none !important;
         }
     }
 </style>
