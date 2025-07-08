@@ -3,7 +3,8 @@
 This directory contains the aphorisms displayed on the website's wisdom cards section.
 
 ## Remaining todos
-1. Incorporate all my aphorisms from https://docs.google.com/document/d/1TWSuSfHaunXeJk2G5bzJC24G0Ljmndlr3K7tInsKX6w/edit?tab=t.0
+1. Incorporate all my aphorisms from https://docs.google.com/document/d/1TWSuSfHaunXeJk2G5bzJC24G0Ljmndlr3K7tInsKX6w/edit?tab=t.0 - including fixing the references
+2. Change to images at the top instead of icons
 
 ## Completed Features
 - ✅ **URL-based navigation**: Each aphorism card is referenceable by a unique URL

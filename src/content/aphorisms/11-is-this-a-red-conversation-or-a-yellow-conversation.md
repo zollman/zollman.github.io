@@ -1,0 +1,10 @@
+---
+title: "Is this a “red” conversation or a “yellow” conversation?"
+order: 11
+icon: "📝"
+description: "Do you *need* help or *want* help? Managers spend a lot of time listening to reports on where there are problems, and it can be difficult to distinguish between an advisory conversation - “I have this under control, I don’t need you to take action, but in case you have good advice for me here’s what’s going on” - and an escalation - “I don’t think we’re going to make this timeline / budget / deliverable work without some external help.” Given that it’s helpful to be explicit: flag upfront whether this is a yellow (advisory) conversation and explain what you’re trying and how you’ll know if you’ve solved the problem; or state directly that it’s a red (escalation) conversation and be prepared to talk through what you’ve tried, what you’re asking for, and what happens if you aren’t able to solve it on your own. Managers (and peers) want to help - but you have to make clear that you’re asking."
+---
+
+# Is this a “red” conversation or a “yellow” conversation?
+
+Do you *need* help or *want* help? Managers spend a lot of time listening to reports on where there are problems, and it can be difficult to distinguish between an advisory conversation - “I have this under control, I don’t need you to take action, but in case you have good advice for me here’s what’s going on” - and an escalation - “I don’t think we’re going to make this timeline / budget / deliverable work without some external help.” Given that it’s helpful to be explicit: flag upfront whether this is a yellow (advisory) conversation and explain what you’re trying and how you’ll know if you’ve solved the problem; or state directly that it’s a red (escalation) conversation and be prepared to talk through what you’ve tried, what you’re asking for, and what happens if you aren’t able to solve it on your own. Managers (and peers) want to help - but you have to make clear that you’re asking.

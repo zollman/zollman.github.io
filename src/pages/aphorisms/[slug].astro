@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { marked } from 'marked';
 
 export async function getStaticPaths() {
     const aphorisms = await getCollection('aphorisms');
@@ -66,9 +67,9 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
                                     <h2 class="text-xl font-bold text-base-content leading-tight">
                                         {currentAphorism.data.title}
                                     </h2>
-                                    <p class="text-base-content/80 text-sm leading-relaxed">
-                                        {currentAphorism.data.description}
-                                    </p>
+                                    <div class="text-base-content/80 text-sm leading-relaxed prose prose-sm max-w-none prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+                                        <Fragment set:html={marked.parse(currentAphorism.data.description)} />
+                                    </div>
                                 </div>
                                 <div class="flex justify-between items-center mt-6">
                                     <div class="text-xs text-base-content/50">
