@@ -6,7 +6,7 @@ description: "Ideas always seem clear in your head, but the process of distillin
 references:
   - title: "Writing is Thinking"
     url: "https://medium.learningbyshipping.com/writing-is-thinking-an-annotated-twitter-thread-2a75fe07fade"
-    author: "Steven Sinofski, “”"
+    author: "Steven Sinofski"
 ---
 
 # Writing is thinking

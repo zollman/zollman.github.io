@@ -2,7 +2,7 @@
 title: "Why, then what, then how"
 order: 2
 icon: "📝"
-description: "Groups larger than a single team suffer from context breaks: people are naturally focused on their local priorities and processes. When asked an open-ended question or recommending a change, it’s helpful to respond with “why, then what, then how” - a shared *why*, a business goal that everyone in the organization agrees on; then a specific what - deliverable or action that is one way to partially achieve that goal; and then an optional how - processes and specific steps that will produce the what you’ve committed to. That helps anchor the conversation and makes it easier to figure out where you may disagree - on the goals (where you really shouldn’t disagree), on what you plan to deliver to attack the goal (where you can have a reasonable debate, and where others will rely on what you produce), or on tactics (that may not matter and can change without involving others)."
+description: "Context in organizations is hard: people know their local priorities and processes, but can't connect them to the whole. A good format for organizing answers is “why, then what, then how” - a shared *why*, a business goal that everyone in the organization agrees on; then a specific *what* - deliverable or action that is one path toward that goal; and then an optional how - specific processes to deliver what you’ve committed to. “Why, what, how” anchors the conversation and highlights where you may disagree: Do you have different goals, priorities or tactics? Do your disagreements matter?"
 references:
   - title: "Start with Why"
     url: "https://www.amazon.com/Start-Why-Leaders-Inspire-Everyone/dp/1591846447"

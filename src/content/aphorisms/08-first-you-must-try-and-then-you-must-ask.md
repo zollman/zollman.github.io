@@ -1,11 +1,12 @@
 ---
-title: "First you must try, and then you must ask"
+title: "First you must try, then you must ask"
 order: 8
 icon: "📝"
-description: "Trying is learning. Especially if you’re a novice at a topic, working with more experienced practitioners. If you’re stuck on finding a bug, figuring out a phrase, generating a new insight, getting a tool to work - push yourself past the point of being stuck. Take another 15 minutes to brainstorm ideas, come up with tests, search for related documentation, and give it another shot. Then, when you’ve done that, write down what you tried and go ask for help. This has three great outcomes: First, you’re likely to learn new techniques. Second, you can blaze a path for the next person stuck on a similar problem. And third, the expert is in a better position to help you - because they can see what you tried, and provide more targeted advice. Don’t stay stuck forever - people love to help. But try, and then ask."
+description: "Trying is learning. Especially if you’re a novice, working with more experienced colleagues. If you’re stuck on finding a bug, figuring out a phrase, generating an insight, getting a tool to work - push yourself just past the point of being stuck. Take another 15 minutes to brainstorm ideas, develop tests, look for docs, and give it another shot. After that, write down what you tried and go ask for help. This has three great outcomes: First, you’ll learn new techniques. Second, you'll blaze a path for someone stuck on a similar problem. And third, the expert can now help better: knowing what you tried leads to more targeted advice. Don’t stay stuck forever; people love to help. But try, and then ask."
 references:
   - title: "You Must Try, and then You Must Ask | Ringel on Random"
     url: "https://www.mattringel.com/2013/09/30/you-must-try-and-then-you-must-ask/"
+    author: Matt Ringel
 ---
 
 # First you must try, and then you must ask
