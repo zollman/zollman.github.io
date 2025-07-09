@@ -1,0 +1,57 @@
+name: Deploy to Cloudflare Workers
+
+on:
+  # Trigger on pushes to main branch for production
+  # push:
+  #  branches: [main]
+  # Trigger on pushes to develop branch for staging
+  # push:
+  #   branches: [develop]
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: 
+          - ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}
+    environment: ${{ matrix.environment }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for Cloudflare Workers
+        run: npm run build:cloudflare
+        env:
+          ENVIRONMENT: ${{ matrix.environment }}
+          PUBLIC_WEBSITE_URL: ${{ matrix.environment == 'production' && 'https://yourdomain.com' || 'https://staging.yourdomain.com' }}
+          PUBLIC_BASE_PATH: ''
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --env ${{ matrix.environment }}
+          workingDirectory: '.'

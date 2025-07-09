@@ -1,0 +1,36 @@
+name = "sigsegv-dev"
+main = "./worker.js"
+compatibility_date = "2024-12-03"
+compatibility_flags = ["nodejs_compat"]
+
+# Static assets configuration
+assets = { directory = "./dist", binding = "ASSETS" }
+
+# Environment variables for different deployments
+[env.staging]
+name = "sigsegv-dev"
+# For workers.dev subdomains, you don't need routes - it's automatic
+# routes = [
+#   { pattern = "sigsegv-dev.summer-mud-dd49.workers.dev", zone_name = "sigsegv-dev.summer-mud-dd49.workers.dev" }
+# ]
+
+[env.production]
+name = "sigsegv-dev-production"
+routes = [
+  { pattern = "yourdomain.com", zone_name = "yourdomain.com" },
+  { pattern = "www.yourdomain.com", zone_name = "yourdomain.com" }
+]
+
+# Variables that can be accessed in your Astro app
+[vars]
+ENVIRONMENT = "development"
+
+[env.staging.vars]
+ENVIRONMENT = "staging"
+PUBLIC_WEBSITE_URL = "https://sigsegv-dev.summer-mud-dd49.workers.dev"
+PUBLIC_BASE_PATH = ""
+
+[env.production.vars]
+ENVIRONMENT = "production"
+PUBLIC_WEBSITE_URL = "https://yourdomain.com"
+PUBLIC_BASE_PATH = ""

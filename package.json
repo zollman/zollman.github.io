@@ -8,10 +8,14 @@
     "build": "astro build",
     "build:staging": "NODE_ENV=staging astro build",
     "build:production": "NODE_ENV=production astro build",
+    "build:cloudflare": "astro build --config astro.config.cloudflare.mjs",
+    "build:cloudflare:staging": "ENVIRONMENT=staging astro build --config astro.config.cloudflare.mjs",
+    "build:cloudflare:production": "ENVIRONMENT=production astro build --config astro.config.cloudflare.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.0",
     "@astrojs/react": "^4.1.4",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.2.1",
