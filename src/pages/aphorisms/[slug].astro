@@ -43,11 +43,11 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
 
 <Layout title={`${aphorism.data.title} - Aphorisms - Aaron Zollman`} description={aphorism.data.description}>
     <!-- Full viewport container that breaks out of the main layout constraints -->
-    <div id="viewport-container" class="fixed inset-0 bg-base-100 flex items-center justify-center p-4 z-10">
+    <div id="viewport-container" class="fixed inset-0 bg-base-100 flex items-start sm:items-center justify-center p-4 pt-8 sm:pt-4 z-10">
         <div id="content-wrapper" class="w-full max-w-md relative">
             <!-- Header positioned above the centered card -->
-            <div id="header-section" class="absolute -top-16 left-0 right-0 text-center">
-                <h1 class="text-3xl font-bold text-base-content">Tools for context</h1>
+            <div id="header-section" class="absolute -top-8 sm:-top-16 left-0 right-0 text-center">
+                <h1 class="text-lg sm:text-3xl font-bold text-base-content">Tools for context</h1>
             </div>
             
             <!-- This container is now the centered element -->
@@ -57,10 +57,10 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
                         class={`aphorism-card absolute w-full transition-all duration-300 ${currentIndex === index ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}
                         data-index={currentIndex}
                     >
-                        <div class="card bg-base-200 shadow-xl border border-base-300 min-h-[500px] flex flex-col">
+                        <div class="card bg-base-200 shadow-xl border border-base-300 min-h-[400px] sm:min-h-[500px] flex flex-col">
                             <div class="card-body p-8 flex-1 flex flex-col justify-between">
                                 <div class="flex-1 flex flex-col justify-center items-center text-center space-y-6">
-                                    <div class="text-6xl mb-4">
+                                    <div class="text-4xl sm:text-6xl mb-2 sm:mb-4">
                                         {currentAphorism.data.icon || '💡'}
                                     </div>
                                     <h2 class="text-xl font-bold text-base-content leading-tight">
@@ -107,8 +107,8 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
                 </svg>
             </button>
             
-            <!-- Navigation positioned below the centered card -->
-            <div id="navigation-section" class="absolute -bottom-20 left-0 right-0">
+            <!-- Navigation positioned at bottom of screen -->
+            <div id="navigation-section" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-20">
                 <!-- Mobile navigation buttons (visible on small screens) -->
                 <div id="mobile-navigation" class="flex justify-center space-x-4 mb-4 sm:hidden">
                     <button id="prev-btn-mobile" class="btn btn-circle btn-outline btn-sm" disabled={index === 0}>
@@ -446,7 +446,7 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
     /* Responsive card heights */
     @media (max-width: 640px) {
         .aphorism-card {
-            height: 450px;
+            height: 350px;
         }
     }
     
@@ -463,7 +463,7 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
     
     @media (max-width: 640px) {
         #aphorism-container {
-            height: 450px;
+            height: 350px;
         }
     }
     
@@ -521,4 +521,17 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
             display: none !important;
         }
     }
+
+    /* Mobile-specific adjustments */
+    @media (max-width: 640px) {
+    /* Reduce card padding on mobile */
+    .aphorism-card .card-body {
+        padding: 1.5rem !important;
+    }
+    
+    /* Tighter spacing in card content */
+    .aphorism-card .space-y-6 {
+        gap: 1rem !important;
+    }
+}
 </style>
