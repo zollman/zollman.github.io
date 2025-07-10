@@ -20,7 +20,7 @@ const getBasePath = () => {
 
 export const profile = {
 	fullName: 'Aaron Zollman',
-	title: 'Security nerd and software engineer. Learning to wear the white hat.',
+	title: 'Security nerd and software engineer. Patching leaky abstractions in systems and organizations.',
 	institute: '',
 	author_name: 'Aaron Zollman', // Author name to be highlighted in the papers section
 	research_areas: [
