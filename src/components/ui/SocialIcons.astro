@@ -26,13 +26,6 @@ const calculatedContainerSize = activeSocial.length <= 5 ? 'size-12' : activeSoc
 		</a>
 	}
 
-	<!-- Instagram -->
-	{social.instagram !== '' &&
-		<a href={social.instagram} target="_blank" class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-xl hover:bg-primary/20 transition-all duration-300`}>
-			<Instagram class={calculatedIconSize} fill="currentColor" />
-		</a>
-	}
-
 	<!-- GitHub -->
 	{social.github !== '' &&
 		<a href={social.github} target="_blank" class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-xl hover:bg-primary/20 transition-all duration-300`}>
@@ -81,4 +74,12 @@ const calculatedContainerSize = activeSocial.length <= 5 ? 'size-12' : activeSoc
 			<Arxiv class={calculatedIconSize} fill="currentColor" />
 		</a>
 	}
+
+	<!-- Instagram -->
+	{social.instagram !== '' &&
+		<a href={social.instagram} target="_blank" class={`${calculatedContainerSize} inline-flex items-center justify-center rounded-xl hover:bg-primary/20 transition-all duration-300`}>
+			<Instagram class={calculatedIconSize} fill="currentColor" />
+		</a>
+	}
+
 </div>
