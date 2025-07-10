@@ -1,5 +1,5 @@
 ---
-title: "Platforms, Products, and Collaboration"
+title: "The unsolvable tradeoff in org design"
 order: 25
 icon: "🧩"
 description: "When should you use a “mission-aligned” design, with independent organizations with their own P&L and distinct business problems vs. “function-aligned” designs, built around depth in a skill area - data science, engineering, sales? Mission-aligned teams can move faster, thanks to independence; but won't have a critical mass of functional expert, and duplicate work within a company. Function-aligned teams go deeper and be more efficient in their areas of support, but create bottlenecks that require complex coordination. Balance requires explicitly designing the interfaces between teams. [Team Topologies](https://teamtopologies.com/key-concepts) provides a framework: some hard boundaries that look like X-as-a-service interfaces; some teams facilitating others’ work with a drop-in, consulting model; and sometimes combining disparate teams for a defined period of time to build something requiring deep collaboration."

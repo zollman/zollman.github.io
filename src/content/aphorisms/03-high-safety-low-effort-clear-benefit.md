@@ -6,7 +6,7 @@ description: "Feedback takes work to prepare & deliver. If you want feedback - a
 references:
   - title: "Why Feedback Hurts"
     url: "https://medium.com/@royrapoport/why-feedback-hurts-49a863154037"
-    author: "Roy Rapport"
+    author: "Roy Rapoport"
 ---
 
 # High safety, low effort, clear benefit
