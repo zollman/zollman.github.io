@@ -22,7 +22,7 @@ function generateSlug(order: number, title: string): string {
 // Redirect to the first aphorism if no specific one is requested
 if (sortedAphorisms.length > 0) {
     const firstSlug = generateSlug(sortedAphorisms[0].data.order, sortedAphorisms[0].data.title);
-    return Astro.redirect(`/aphorisms/${firstSlug}`);
+    return Astro.rewrite(`/aphorisms/${firstSlug}`);
 }
 ---
 
