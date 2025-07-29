@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { profile } from '../settings'
+
+const { fullName, title } = profile
+---
+
+<Layout title="Security Community - Aaron Zollman" description="Security community relationships">
+	<div class="max-w-4xl mx-auto">
+		<h1 class="text-4xl font-bold mb-8">Community</h1>
+		
+		<div class="prose prose-lg max-w-none">
+
+            <p>
+                The security community is home for me. I attended my first DEF CON in 1999 and was 
+                hooked - first on mailing lists and local events, eventually national
+                and global conferences as a volunteer, organizer and occasional presenter. 
+                Commercially, I've worked as a practitioner, vendor, implementer, advisor and 
+                investor. 
+            </p>
+
+            <p>
+                I love that this industry is cooperative: for most of us, the rest of the security
+                community isn't our competition - the adversaries and threat actors are. So there's
+                a tradition of community-run, nonprofit events and groups who get together regularly
+                to share knowledge and ideas more or less openly. And - while we still have a ways
+                to go - the community has gotten more welcoming over time, with subcommunities for 
+                different types of practitioners and backgrounds.
+            </p>
+
+            <h2>
+                Conferences
+            </h2>
+
+            <p>
+                While the giant conferences - RSA and Black Hat - have their place, I've increasingly
+                found that I learn the most at smaller community conferences. My sweet spot is 300-500
+                people: enough to have conversations and not have to travel as far between conversations;
+                but large enough to represent different perspectives.
+            </p>
+
+            <p>
+                So these days I'm most likely to be at community events:
+            </p>
+			<ul>
+				<li><b>fwd:cloudsec</b>, focused on independent cloud security practitioners; I helped build
+                    this conference back in 2019 and continue to participate on the board and organizing committee.</li>
+				<li><b>BSides Las Vegas</b>, a generalist, community-run, in-the-weeds event more likely to
+                    contain practical talks on life as a defender, with real lessons about what does and doesn't work.
+                    I used to enjoy the new vulnerability drops at Black Hat and DEF CON - but while they're fun, 
+                    in practice I can't use them in my day-to-day.
+                </li>
+				<li><b>Shmoocon</b>, which ended in 2025, was *the* conference for the DC area; with tracks on
+                    "build it" (new tools), "belay it" (defensive techniques - originally "break it" in early years
+                    until the founders wanted to change focus), and "bring it on" (community, policy and nontechnical
+                    practices - befitting the DC environment)
+                    </li>
+				<li><b>Summercon</b>, one of the original hacker conferences. I'll be honest - this one is mostly a 
+                    hangout; the talks are researchy and esoteric and not practical. But it's in Brooklyn and a lot
+                    of folks who've been in the community for a long time attend.
+                    </li>
+            </ul>
+
+            <h2>
+                Startups
+            </h2>
+
+            <p>
+                I got involved in a few early-stage Internet companies in high school - Orlando's biggest dialup
+                internet company, and a DC-based network provider that had aspirations of being a major backbone
+                player on the East Coast. When I left my first post-college gig, I joined up with some friends, 
+                bought a patent back from our prior employer, and made a go of turning it into a product. 
+                While I left after a few years in a company pivot, I've loved the startup ecosystem ever since.
+            </p>
+
+            <p>
+                Still, it can be hard to innovate in those corporate roles, and so some of the most exciting ideas -
+                the ones that push the industry forward - come out of startups. I've been lucky enough to advise and
+                invest in several, and while I keep a strict wall between the companies I'm involved in personally
+                and my day job, it's still worth doing because it keeps me close to people who are trying new technical
+                approaches - and because, after all this time, moving the community forward is as important to me as
+                any other professional responsibily. I specifically focus on companies that are developer-forward, who
+                believe that the future of security is embedded in other parts of the business, driven by automation
+                and integration with less-technical users and workflows.
+            </p>
+
+            <p>
+                For disclosure, here are the companies I'm working with:
+            </p>
+
+			<ul>
+				<li><b>outtake.ai</b>, using new AI techniques to combat impersonation on the Internet. I'm 
+                    excited about them because their founders - as Palantir alumni - impressed me with their
+                    ability to solve practical problems that require sifting through vast amounts of data. 
+                    Security folks have been talking about anomaly detection and ML for years, but their
+                    take was fresh and novel - and they proved it works.
+                </li>
+                <li><b>Socket</b>, automating analysis of dependencies. Software composition analysis is not
+                    new, but many tools drown you in false-positives; Socket has automated a much more comprehensive
+                    analysis that gives you a clearer sense of whether a dependency is truly vulnerable or - worse - 
+                    malicious, using your organization's risk tolerance. And more importantly, it meets developers
+                    where they are.
+                </li>
+				<li><b>North Pole Security</b>, bringing delegated security decisions to teams. There's an inherent
+                    tradeoff in security between locking things down (but preventing legitimate work) and being open
+                    (but accepting the risk of malware). North Pole recognizes that the people best suited to make
+                    these tradeoffs are within the team - not an ivory tower security organization. Based on the
+                    open-source Santa product, they have systems that help defenders work together to make smarter
+                    decisions about what should run on endpoints.
+                </li>
+				<li><b>Work-Bench</b>, a NYC-based seed fund, focused on early-stage founders in infrastructure,
+                    data, security and the future of work. I really like their approach - taking people with technical
+                    and business depth and teaching them go-to-market skills in enterprise products through the 
+                    power of local community. The overall security vendor ecosystem can feel like a "market for lemons;" 
+                    in that it's hard to tell what works, and companies over-sell their impact often because they
+                    (including me during my early startup days) lack experience as a corporate defender. Work-Bench
+                    helps to bridge this gap, whether it's in product-led growth or more traditional sales - important
+                    because even a perfect product needs distribution to succeed.
+                </li>
+			</ul>
+			
+			<h2>Learn more...</h2>
+			<p>
+                I reserve a few hours a week to meet with folks from the community to talk about these and
+                other topics. Find me and let's chat.
+			</p>
+		</div>
+		
+		<div class="mt-12">
+			<a 
+				href="/" 
+				class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+			>
+				← Back to Home
+			</a>
+		</div>
+	</div>
+</Layout>
