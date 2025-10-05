@@ -9,7 +9,7 @@ This directory contains the aphorisms displayed on the website's wisdom cards se
 ## Completed Features
 - ✅ **URL-based navigation**: Each aphorism card is referenceable by a unique URL
   - Format: `/aphorisms/{order-padded}-{title-slug}`
-  - Example: `/aphorisms/01-who-should-do-what-differently-be-specific`
+  - Example: `/aphorisms/01-why-then-what-then-how/`
   - Base URL `/aphorisms` redirects to the first aphorism
   - URLs are shareable and bookmarkable
   - Browser back/forward navigation works seamlessly

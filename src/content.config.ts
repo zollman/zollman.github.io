@@ -27,7 +27,7 @@ const aphorisms = defineCollection({
         title: z.string(),
         order: z.number(),
         icon: z.string().optional(),
-        description: z.string(),
+        description: z.string().optional(),
         references: z.array(z.object({
             title: z.string(),
             url: z.string().url(),

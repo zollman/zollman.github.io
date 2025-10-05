@@ -25,11 +25,15 @@ export async function getStaticPaths() {
         return {
             params: { slug },
             props: { 
-                aphorism, 
+                aphorismData: {
+                    data: aphorism.data,
+                    body: aphorism.body
+                },
                 index,
                 slug,
-                allAphorisms: sortedAphorisms.map((a, i) => ({
-                    ...a,
+                allAphorismsData: sortedAphorisms.map((a, i) => ({
+                    data: a.data,
+                    body: a.body,
                     slug: generateSlug(a.data.order, a.data.title),
                     index: i
                 }))
@@ -38,10 +42,24 @@ export async function getStaticPaths() {
     });
 }
 
-const { aphorism, index, slug, allAphorisms } = Astro.props;
+const { aphorismData, index, slug, allAphorismsData } = Astro.props;
+
+// Helper function to get plain text from markdown for meta description
+function getPlainText(content: string): string {
+    return content
+        .replace(/#{1,6}\s+/g, '') // Remove markdown headings
+        .replace(/\*\*(.+?)\*\*/g, '$1') // Remove bold
+        .replace(/\*(.+?)\*/g, '$1') // Remove italic
+        .replace(/\[(.+?)\]\(.+?\)/g, '$1') // Remove links, keep text
+        .replace(/\n+/g, ' ') // Replace newlines with spaces
+        .trim();
+}
+
+// Get description for meta tags - use explicit description or fall back to body content
+const metaDescription = aphorismData.data.description || getPlainText(aphorismData.body);
 ---
 
-<Layout title={`${aphorism.data.title} - People all the way down - Aaron Zollman`} description={aphorism.data.description}>
+<Layout title={`${aphorismData.data.title} - People all the way down - Aaron Zollman`} description={metaDescription}>
     <!-- Full viewport container that breaks out of the main layout constraints -->
     <div id="viewport-container" class="fixed inset-0 bg-base-100 flex items-start sm:items-center justify-center p-4 pt-8 sm:pt-4 z-10">
         <div id="content-wrapper" class="w-full max-w-md relative">
@@ -52,7 +70,7 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
             
             <!-- This container is now the centered element -->
             <div id="aphorism-container" class="relative">
-                {allAphorisms.map((currentAphorism, currentIndex) => (
+                {allAphorismsData.map((currentAphorism, currentIndex) => (
                     <div 
                         class={`aphorism-card absolute w-full transition-all duration-300 ${currentIndex === index ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}
                         data-index={currentIndex}
@@ -67,12 +85,12 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
                                         {currentAphorism.data.title}
                                     </h2>
                                     <div class="text-base-content/80 text-sm leading-relaxed prose prose-sm max-w-none prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
-                                        <Fragment set:html={marked.parse(currentAphorism.data.description)} />
+                                        <Fragment set:html={marked.parse(currentAphorism.body)} />
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center mt-6">
                                     <div class="text-xs text-base-content/50">
-                                        {currentIndex + 1}/{allAphorisms.length}
+                                        {currentIndex + 1}/{allAphorismsData.length}
                                     </div>
                                     {/* Show references button only if references exist */}
                                     {currentAphorism.data.references && currentAphorism.data.references.length > 0 && (
@@ -101,7 +119,7 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
             </button>
             
             <!-- Next button positioned to the right of the card -->
-            <button id="next-btn" class="absolute right-0 top-1/2 btn btn-circle btn-outline btn-sm" disabled={index === allAphorisms.length - 1}>
+            <button id="next-btn" class="absolute right-0 top-1/2 btn btn-circle btn-outline btn-sm" disabled={index === allAphorismsData.length - 1}>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
@@ -116,7 +134,7 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
-                    <button id="next-btn-mobile" class="btn btn-circle btn-outline btn-sm" disabled={index === allAphorisms.length - 1}>
+                    <button id="next-btn-mobile" class="btn btn-circle btn-outline btn-sm" disabled={index === allAphorismsData.length - 1}>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
@@ -124,7 +142,7 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
                 </div>
                 
                 <div id="dot-indicators" class="flex justify-center space-x-2">
-                    {allAphorisms.map((_, dotIndex) => (
+                    {allAphorismsData.map((_, dotIndex) => (
                         <button 
                             class={`w-2 h-2 rounded-full transition-all ${dotIndex === index ? 'bg-primary' : 'bg-base-content/20'}`}
                             data-dot={dotIndex}
@@ -156,11 +174,11 @@ const { aphorism, index, slug, allAphorisms } = Astro.props;
 </Layout>
 
 <script define:vars={{ 
-    aphorismsReferences: allAphorisms.map((aphorism, index) => ({
+    aphorismsReferences: allAphorismsData.map((aphorism, index) => ({
         index, 
         references: aphorism.data.references || null
     })),
-    allAphorismsSlugs: allAphorisms.map(a => ({ index: a.index, slug: a.slug })),
+    allAphorismsSlugs: allAphorismsData.map(a => ({ index: a.index, slug: a.slug })),
     currentAphorismIndex: index
 }}>
     // Store references data globally for client-side access
